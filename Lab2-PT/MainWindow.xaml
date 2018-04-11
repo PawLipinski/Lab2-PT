@@ -6,6 +6,15 @@
         <TextBox Name="filepathBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" Grid.ColumnSpan="2"/>
         <Button Content="Find" HorizontalAlignment="Left" Margin="415,10,0,0" VerticalAlignment="Top" Width="118" Height="23" Click="Button_Click"/>
         <Button Content="Load" HorizontalAlignment="Left" Margin="10,38,-88,0" VerticalAlignment="Top" Width="523" Grid.ColumnSpan="2" Click="Button_Click_1"/>
-        <TreeView Name="treeView" HorizontalAlignment="Left" Margin="10,68,-88,10" Width="523" Height="450" Grid.ColumnSpan="2"/>
+        <TreeView Name="treeView" HorizontalAlignment="Left" Margin="10,68,-88,10" Width="523" Height="450" Grid.ColumnSpan="2" SelectedItemChanged="SolutionTree_SelectedItemChanged">
+            <TreeView.Resources>
+                <ContextMenu x:Key ="FileContext" Tag="File"  StaysOpen="true">
+                    <MenuItem Header="Remove" Click="RemoveFile"/>
+                </ContextMenu>
+                <ContextMenu x:Key="FolderContext" Tag="Directory"  StaysOpen="true">
+                    <MenuItem Header="Add..."/>
+                </ContextMenu>
+            </TreeView.Resources>
+        </TreeView>
     </Grid>
 </Window>

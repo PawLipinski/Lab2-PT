@@ -53,13 +53,14 @@ namespace Lab2_PT
                 }
                 toReturn.Header = analysed.Name;
                 toReturn.LinkPath = analysed.FullName;
+                toReturn.Tag = "Directory";
 
                 return toReturn;
             }
 
             else
             {
-                return new MyTreeViewItem() { Header = analysed.Name, LinkPath = analysed.FullName };
+                return new MyTreeViewItem() { Header = analysed.Name, LinkPath = analysed.FullName, Tag = "File"};
             }
         }
     }
