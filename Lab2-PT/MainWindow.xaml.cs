@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Lab2_PT
 {
@@ -66,14 +67,18 @@ namespace Lab2_PT
         private void SolutionTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeViewItem SelectedItem = treeView.SelectedItem as TreeViewItem;
-            switch (SelectedItem.Tag.ToString())
+            if (SelectedItem != null)
             {
-                case "File":
-                    treeView.ContextMenu = treeView.Resources["FileContext"] as System.Windows.Controls.ContextMenu;
-                    break;
-                case "Directory":
-                    treeView.ContextMenu = treeView.Resources["FolderContext"] as System.Windows.Controls.ContextMenu;
-                    break;
+
+                switch (SelectedItem.Tag.ToString())
+                {
+                    case "File":
+                        treeView.ContextMenu = treeView.Resources["FileContext"] as System.Windows.Controls.ContextMenu;
+                        break;
+                    case "Directory":
+                        treeView.ContextMenu = treeView.Resources["FolderContext"] as System.Windows.Controls.ContextMenu;
+                        break;
+                }
             }
         }
 
@@ -96,7 +101,8 @@ namespace Lab2_PT
                 string prefix = (this.treeView.SelectedItem as MyTreeViewItem).LinkPath + "\\";
                 MyTreeViewItem toAdd = new MyTreeViewItem { Header = nameInput.Text, Tag = "File", LinkPath = prefix + nameInput.Text };
                 (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(toAdd);
-                File.Create(toAdd.LinkPath);
+                var myFile = File.Create(toAdd.LinkPath);
+                myFile.Close();
             }
             this.nameInput.Text = string.Empty;
             this.AddGrid.Visibility = Visibility.Collapsed;
@@ -105,13 +111,16 @@ namespace Lab2_PT
         private void RemoveFile(object sender, RoutedEventArgs e)
         {
             MyTreeViewItem SelectedItem = treeView.SelectedItem as MyTreeViewItem;
-
             string pathToFile = SelectedItem.LinkPath;
+            SelectedItem.IsSelected = false;
 
-            this.treeView.Items.Remove(SelectedItem);
+            MyTreeViewItem parent = (MyTreeViewItem)SelectedItem.Parent;
+
+            parent.Items.Remove(SelectedItem);
+
+            treeView.Items.Refresh();
 
             File.Delete(pathToFile);
-            this.treeView.Items.Refresh();
         }
     }
 }
