@@ -12,9 +12,11 @@
                     <MenuItem Header="Remove" Click="RemoveFile"/>
                 </ContextMenu>
                 <ContextMenu x:Key="FolderContext" Tag="Directory"  StaysOpen="true">
-                    <MenuItem Header="Add..."/>
+                    <MenuItem Header="Add..." Click="AddFile"/>
                 </ContextMenu>
             </TreeView.Resources>
         </TreeView>
+
     </Grid>
 </Window>
+
