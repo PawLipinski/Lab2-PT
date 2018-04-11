@@ -17,11 +17,13 @@
             </TreeView.Resources>
         </TreeView>
         <Grid Name="AddGrid" HorizontalAlignment="Left" Height="508" Margin="10,10,0,0" VerticalAlignment="Top" Width="522" Visibility="Collapsed" >
-            <Grid Background="Black" Opacity="0.5">
-                <Button Content="Dodaj" Name="addButton" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="502" Click="CreateFile"/>
-                <Label Content="Podaj nazwę i rozszerzenie pliku" Background="White" HorizontalAlignment="Left" Margin="172,209,0,0" VerticalAlignment="Top" Width="184"/>
+            <Grid Opacity="1">
+                <Rectangle Name="Background" Fill="Black" Opacity="0.5" HorizontalAlignment="Stretch" Stretch="Fill" Margin="-1,0,1,0">
+                </Rectangle>
+                <Button Content="Add" Name="addButton" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="502" Click="CreateFile" Height="23" />
+                <Label Content="Provide a name for a file and its extention" HorizontalContentAlignment="Center" Background="White" Foreground="Black" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top" Width="502"/>
             </Grid>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="502" Name="nameInput"/>
+            <TextBox HorizontalAlignment="Left" Foreground="Black" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="502" Name="nameInput"/>
         </Grid>
     </Grid>
 </Window>

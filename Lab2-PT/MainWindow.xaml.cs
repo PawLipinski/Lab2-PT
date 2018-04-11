@@ -77,28 +77,6 @@ namespace Lab2_PT
             }
         }
 
-        //private void AddFile(object sender, RoutedEventArgs e)
-        //{
-        //    MyTreeViewItem SelectedItem = treeView.SelectedItem as MyTreeViewItem;
-        //    string prefix = SelectedItem.LinkPath;
-
-        //    using (SaveFileDialog fdb = new SaveFileDialog())
-        //    {
-        //        if (fdb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        //        {
-        //            (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(new MyTreeViewItem { Header = System.IO.Path.GetFileName(fdb.FileName), Tag= "File", LinkPath= fdb.FileName });
-        //            File.Create(prefix + "\\" + System.IO.Path.GetFileName(fdb.FileName));
-        //        }
-        //        if (fdb.FileName == string.Empty)
-        //        {
-        //            System.Windows.MessageBox.Show("No file name given!", "Error", MessageBoxButton.OK);
-        //        }
-        //    }
-
-        //    treeView.Items.Refresh();
-        //}
-
-
         private void AddFile(object sender, RoutedEventArgs e)
         {
             MyTreeViewItem SelectedItem = treeView.SelectedItem as MyTreeViewItem;
