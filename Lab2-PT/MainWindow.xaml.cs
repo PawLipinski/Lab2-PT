@@ -1,20 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Lab2_PT
 {
@@ -90,14 +80,6 @@ namespace Lab2_PT
 
         private void AddFile(object sender, RoutedEventArgs e)
         {
-            //SaveFileDialog saveFile = new SaveFileDialog();
-            //DialogResult result = saveFile.ShowDialog();
-
-            //if (result == System.Windows.Forms.DialogResult.OK)
-            //{
-
-            //}
-
             MyTreeViewItem SelectedItem = treeView.SelectedItem as MyTreeViewItem;
             string prefix = SelectedItem.LinkPath;
 
@@ -105,8 +87,6 @@ namespace Lab2_PT
             {
                 if (fdb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    //folderPath = fdb.FileName;
-
                     (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(new MyTreeViewItem { Header = System.IO.Path.GetFileName(fdb.FileName), Tag= "File", LinkPath= fdb.FileName });
                     File.Create(prefix + "\\" + System.IO.Path.GetFileName(fdb.FileName));
                 }
