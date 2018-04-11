@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Lab2_PT
 {
@@ -98,11 +99,19 @@ namespace Lab2_PT
             }
             else
             {
-                string prefix = (this.treeView.SelectedItem as MyTreeViewItem).LinkPath + "\\";
-                MyTreeViewItem toAdd = new MyTreeViewItem { Header = nameInput.Text, Tag = "File", LinkPath = prefix + nameInput.Text };
-                (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(toAdd);
-                var myFile = File.Create(toAdd.LinkPath);
-                myFile.Close();
+                if (VerifyFile(nameInput.Text))
+                {
+
+                    string prefix = (this.treeView.SelectedItem as MyTreeViewItem).LinkPath + "\\";
+                    MyTreeViewItem toAdd = new MyTreeViewItem { Header = nameInput.Text, Tag = "File", LinkPath = prefix + nameInput.Text };
+                    (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(toAdd);
+                    var myFile = File.Create(toAdd.LinkPath);
+                    myFile.Close();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("File name is improper!", "Error", MessageBoxButton.OK);
+                }
             }
             this.nameInput.Text = string.Empty;
             this.AddGrid.Visibility = Visibility.Collapsed;
@@ -121,6 +130,12 @@ namespace Lab2_PT
             treeView.Items.Refresh();
 
             File.Delete(pathToFile);
+        }
+
+        private bool VerifyFile(string fileName)
+        {
+            Regex rgx = new Regex(@"^[\w,\s -] +\.[A - Za - z]{ 3}$");
+            return rgx.IsMatch(fileName);
         }
     }
 }
