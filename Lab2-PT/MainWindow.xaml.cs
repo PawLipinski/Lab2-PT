@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace Lab2_PT
 {
@@ -23,6 +25,30 @@ namespace Lab2_PT
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var path = dialog.SelectedPath;
+                    filepathBox.Text = path;
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.treeView.Items.Clear();
+
+            List<MyTreeViewItem> results = FileRetriever.RetrieveFiles(filepathBox.Text);
+
+            foreach (var item in results)
+            {
+                this.treeView.Items.Add(item);
+            }
         }
     }
 }
