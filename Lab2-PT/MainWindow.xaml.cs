@@ -41,13 +41,24 @@ namespace Lab2_PT
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.treeView.Items.Clear();
-
-            List<MyTreeViewItem> results = FileRetriever.RetrieveFiles(filepathBox.Text);
-
-            foreach (var item in results)
+            try
             {
-                this.treeView.Items.Add(item);
+                this.treeView.Items.Clear();
+
+                List<MyTreeViewItem> results = FileRetriever.RetrieveFiles(filepathBox.Text);
+
+                foreach (var item in results)
+                {
+                    this.treeView.Items.Add(item);
+                }
+            }
+
+            catch (Exception)
+            {
+                var result = System.Windows.MessageBox.Show("No such directory!", "Error", MessageBoxButton.OK);
+
+                this.filepathBox.Text = "";
+
             }
         }
     }

@@ -20,24 +20,20 @@ namespace Lab2_PT
 
             items = new List<MyTreeViewItem>();
 
-            //MyTreeViewItem analysedDirectory = new MyTreeViewItem();
-
-            try
+            if (di.Exists)
             {
-                if (di.Exists)
-                {
-                    internals = di.GetFileSystemInfos();
+                internals = di.GetFileSystemInfos();
 
-                    foreach (var item in internals)
-                    {
-                        items.Add(RecursiveSubdirectoriesPrinter(item));
-                    }
+                foreach (var item in internals)
+                {
+                    items.Add(RecursiveSubdirectoriesPrinter(item));
                 }
             }
-            catch
+            else
             {
-                MessageBox.Show("No such directory");
+                throw new Exception();
             }
+
 
             return items;
         }
