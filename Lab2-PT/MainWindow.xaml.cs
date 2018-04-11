@@ -19,7 +19,7 @@ namespace Lab2_PT
         {
             InitializeComponent();
 
-            this.LoadTree("C:\\Users\\pawel.lipinski\\Documents\\TestFolder");
+            this.LoadTree("C: \\Users\\Paweł_2\\Pulpit\\Testowy");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -75,28 +75,53 @@ namespace Lab2_PT
                     treeView.ContextMenu = treeView.Resources["FolderContext"] as System.Windows.Controls.ContextMenu;
                     break;
             }
-            //SelectedItem.IsSelected = true;
         }
+
+        //private void AddFile(object sender, RoutedEventArgs e)
+        //{
+        //    MyTreeViewItem SelectedItem = treeView.SelectedItem as MyTreeViewItem;
+        //    string prefix = SelectedItem.LinkPath;
+
+        //    using (SaveFileDialog fdb = new SaveFileDialog())
+        //    {
+        //        if (fdb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //        {
+        //            (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(new MyTreeViewItem { Header = System.IO.Path.GetFileName(fdb.FileName), Tag= "File", LinkPath= fdb.FileName });
+        //            File.Create(prefix + "\\" + System.IO.Path.GetFileName(fdb.FileName));
+        //        }
+        //        if (fdb.FileName == string.Empty)
+        //        {
+        //            System.Windows.MessageBox.Show("No file name given!", "Error", MessageBoxButton.OK);
+        //        }
+        //    }
+
+        //    treeView.Items.Refresh();
+        //}
+
 
         private void AddFile(object sender, RoutedEventArgs e)
         {
             MyTreeViewItem SelectedItem = treeView.SelectedItem as MyTreeViewItem;
             string prefix = SelectedItem.LinkPath;
 
-            using (SaveFileDialog fdb = new SaveFileDialog())
-            {
-                if (fdb.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(new MyTreeViewItem { Header = System.IO.Path.GetFileName(fdb.FileName), Tag= "File", LinkPath= fdb.FileName });
-                    File.Create(prefix + "\\" + System.IO.Path.GetFileName(fdb.FileName));
-                }
-                if (fdb.FileName == string.Empty)
-                {
-                    System.Windows.MessageBox.Show("No file name given!", "Error", MessageBoxButton.OK);
-                }
-            }
+            this.AddGrid.Visibility = Visibility.Visible;
+        }
 
-            treeView.Items.Refresh();
+        private void CreateFile(object sender, RoutedEventArgs e)
+        {
+            if (nameInput.Text == string.Empty)
+            {
+                System.Windows.MessageBox.Show("No file name given!", "Error", MessageBoxButton.OK);
+            }
+            else
+            {
+                string prefix = (this.treeView.SelectedItem as MyTreeViewItem).LinkPath + "\\";
+                MyTreeViewItem toAdd = new MyTreeViewItem { Header = nameInput.Text, Tag = "File", LinkPath = prefix + nameInput.Text };
+                (this.treeView.SelectedItem as MyTreeViewItem).Items.Add(toAdd);
+                File.Create(toAdd.LinkPath);
+            }
+            this.nameInput.Text = string.Empty;
+            this.AddGrid.Visibility = Visibility.Collapsed;
         }
 
         private void RemoveFile(object sender, RoutedEventArgs e)
@@ -106,9 +131,9 @@ namespace Lab2_PT
             string pathToFile = SelectedItem.LinkPath;
 
             this.treeView.Items.Remove(SelectedItem);
-            this.treeView.Items.Refresh();
 
             File.Delete(pathToFile);
+            this.treeView.Items.Refresh();
         }
     }
 }

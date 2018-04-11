@@ -16,13 +16,13 @@
                 </ContextMenu>
             </TreeView.Resources>
         </TreeView>
-    <Grid HorizontalAlignment="Left" Height="508" Margin="10,10,0,0" VerticalAlignment="Top" Width="522" >
-        <Grid Background="Black" Opacity="0.5">
-                <Button Content="Button" HorizontalAlignment="Left" Margin="222,280,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid Name="AddGrid" HorizontalAlignment="Left" Height="508" Margin="10,10,0,0" VerticalAlignment="Top" Width="522" Visibility="Collapsed" >
+            <Grid Background="Black" Opacity="0.5">
+                <Button Content="Dodaj" Name="addButton" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Width="502" Click="CreateFile"/>
+                <Label Content="Podaj nazwę i rozszerzenie pliku" Background="White" HorizontalAlignment="Left" Margin="172,209,0,0" VerticalAlignment="Top" Width="184"/>
             </Grid>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="149,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Name="nameInput"/>
-        <Label Content="Podaj nazwę i rozszerzenie pliku" Background="White" HorizontalAlignment="Left" Margin="173,215,0,0" VerticalAlignment="Top" Width="184"/>
-    </Grid>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="502" Name="nameInput"/>
+        </Grid>
     </Grid>
 </Window>
 
